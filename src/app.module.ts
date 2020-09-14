@@ -10,6 +10,7 @@ import { OdjavaZaposleni } from '../entities/odjavaZaposleni.entity';
 import { Prijava } from '../entities/prijava.entity';
 import { PrijavaZaposleni } from '../entities/prijavaZaposleni.entity';
 import { Zaposleni } from '../entities/zaposleni.entity';
+import { AdministratorController } from './controllers/administrator.controller';
 
 @Module({
   imports: [
@@ -33,7 +34,10 @@ import { Zaposleni } from '../entities/zaposleni.entity';
     }), 
     TypeOrmModule.forFeature([ Administrator ])
   ],
-  controllers: [AppController],
+  controllers: [
+    AppController,
+    AdministratorController,
+  ],
   providers: [AdministratorService],
 })
 export class AppModule {}
