@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { AppController } from './controllers/app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfiguration } from '../config/database.configuration';
 import { Administrator } from '../entities/administrator.entity';
@@ -10,7 +10,7 @@ import { OdjavaZaposleni } from '../entities/odjavaZaposleni.entity';
 import { Prijava } from '../entities/prijava.entity';
 import { PrijavaZaposleni } from '../entities/prijavaZaposleni.entity';
 import { Zaposleni } from '../entities/zaposleni.entity';
-import { AdministratorController } from './controllers/administrator.controller';
+import { AdministratorController } from './controllers/api/administrator.controller';
 
 @Module({
   imports: [
