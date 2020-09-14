@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Administrator } from 'entities/administrator.entity';
 import { Repository } from 'typeorm';
+import { Administrator } from '../../../entities/administrator.entity';
 
 
 @Injectable()
@@ -18,4 +18,6 @@ export class AdministratorService {
     getById(id: number): Promise<Administrator> {
         return this.administrator.findOne(id);
     }
+
+    
 }
