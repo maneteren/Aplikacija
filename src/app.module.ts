@@ -36,7 +36,7 @@ import { AdministratorController } from './controllers/api/administrator.control
   ],
   controllers: [
     AppController,
-    AdministratorController,
+    AdministratorController
   ],
   providers: [AdministratorService],
 })
