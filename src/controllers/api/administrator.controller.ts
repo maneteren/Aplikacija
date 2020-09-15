@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { Administrator } from "../../../entities/administrator.entity";
 import { AddAdministratorDto } from "../../dtos/administrator/add.administrator.dto";
 import { EditAdministratorDto } from "../../dtos/administrator/edit.administrator.dto";
+import { ApiResponse } from "../../misc/api.response.class";
 import { AdministratorService } from "../../services/administrator/administrator.service";
 
 
@@ -20,19 +21,27 @@ export class AdministratorController {
 
     // GET http://localhost:3000/api/administrator/4/ "dostavi mi administratora sa id 4"
     @Get(':id')
-    getById(@Param('id') administratorId: number): Promise<Administrator> {
-        return this.administratorService.getById(administratorId);
+    getById(@Param('id') administratorId: number): Promise<Administrator | ApiResponse> {
+        return new Promise(async (resolve) =>{
+            let admin = await this.administratorService.getById(administratorId);
+
+            if (admin === undefined) {
+                resolve(new ApiResponse("error", -1002));
+            }
+
+            resolve(admin);
+        });
     }
 
     // PUT http://localhost:3000/api/administrator
     @Put()
-    add(@Body() data: AddAdministratorDto): Promise<Administrator> {
+    add(@Body() data: AddAdministratorDto): Promise<Administrator | ApiResponse> {
         return this.administratorService.add(data);
     }
 
     // POST http://localhost:3000/api/administrator/4/ "Hocu da promenim administratora sa id 4"
     @Post(':id')
-    edit(@Param('id') id: number, @Body() data: EditAdministratorDto): Promise<Administrator> {
+    edit(@Param('id') id: number, @Body() data: EditAdministratorDto): Promise<Administrator | ApiResponse> {
         return this.administratorService.editById(id, data);
     }
 }
