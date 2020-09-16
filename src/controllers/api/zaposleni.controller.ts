@@ -10,9 +10,22 @@ import { ZaposleniService } from "../../services/zaposleni/zaposleni.service";
     },
     params: {
         id: {
-            field: 'id',
+            field: 'zaposleniId',
             type: 'number',
             primary: true
+        }
+    },
+    query: {
+        join: {
+            prijavaZaposlenis: {
+                eager: true
+            },
+            odjavaZaposlenis: {
+                eager: true
+            },
+            izvestajs: {
+                eager: false
+            }
         }
     }
 })

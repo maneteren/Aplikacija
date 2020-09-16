@@ -13,6 +13,12 @@ import { Zaposleni } from '../entities/zaposleni.entity';
 import { AdministratorController } from './controllers/api/administrator.controller';
 import { ZaposleniController } from './controllers/api/zaposleni.controller';
 import { ZaposleniService } from './services/zaposleni/zaposleni.service';
+import { PrijavaService } from './services/prijava/prijava.service';
+import { PrijavaController } from './controllers/api/prijava.controller';
+import { OdjavaController } from './controllers/api/odjava.controller';
+import { OdjavaService } from './services/odjava/odjava.service';
+import { IzvestajService } from './services/izvestaj/izvestaj.service';
+import { IzvestajController } from './controllers/api/izvestaj.controller';
 
 @Module({
   imports: [
@@ -36,17 +42,26 @@ import { ZaposleniService } from './services/zaposleni/zaposleni.service';
     }), 
     TypeOrmModule.forFeature([ 
       Administrator,
-      Zaposleni
+      Zaposleni,
+      Prijava,
+      Odjava,
+      Izvestaj
     ])
   ],
   controllers: [
     AppController,
     AdministratorController,
-    ZaposleniController
+    ZaposleniController,
+    PrijavaController,
+    OdjavaController,
+    IzvestajController
   ],
   providers: [
     AdministratorService,
-    ZaposleniService
+    ZaposleniService,
+    PrijavaService,
+    OdjavaService,
+    IzvestajService
   ],
 })
 export class AppModule {}

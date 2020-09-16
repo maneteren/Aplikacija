@@ -2,11 +2,15 @@ import {
   Column,
   Entity,
   Index,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Izvestaj } from "./izvestaj.entity";
+import { Odjava } from "./odjava.entity";
 import { OdjavaZaposleni } from "./odjavaZaposleni.entity";
+import { Prijava } from "./prijava.entity";
 import { PrijavaZaposleni } from "./prijavaZaposleni.entity";
 
 @Index("id_broj_zaposlenog", ["idBrojZaposlenog"], { unique: true })
@@ -50,4 +54,20 @@ export class Zaposleni {
     (prijavaZaposleni) => prijavaZaposleni.zaposleni
   )
   prijavaZaposlenis: PrijavaZaposleni[];
+
+  @ManyToMany(type => Prijava, prijava => prijava.zaposleni)
+  @JoinTable({
+    name: "prijava_zaposleni",
+    joinColumn: { name: "zaposleni_id", referencedColumnName: "zaposleniId" },
+    inverseJoinColumn: { name: "prijava_id", referencedColumnName: "prijavaId"}
+  })
+  prijave: Prijava[];
+
+  @ManyToMany(type => Odjava, odjava => odjava.zaposleni)
+  @JoinTable({
+    name: "odjava_zaposleni",
+    joinColumn: { name: "zaposleni_id", referencedColumnName: "zaposleniId" },
+    inverseJoinColumn: { name: "odjava_id", referencedColumnName: "odjavaId"}
+  })
+  odjave: Odjava[];
 }

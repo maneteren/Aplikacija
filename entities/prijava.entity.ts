@@ -2,10 +2,13 @@ import {
   Column,
   Entity,
   Index,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { PrijavaZaposleni } from "./prijavaZaposleni.entity";
+import { Zaposleni } from "./zaposleni.entity";
 
 @Index("datum_vreme", ["datumVreme"], { unique: true })
 @Entity("prijava", { schema: "aplikacija" })
@@ -25,4 +28,12 @@ export class Prijava {
     (prijavaZaposleni) => prijavaZaposleni.prijava
   )
   prijavaZaposlenis: PrijavaZaposleni[];
+
+  @ManyToMany(type => Zaposleni, zaposleni => zaposleni.prijave)
+  @JoinTable({
+    name: "prijava_zaposleni",
+    joinColumn: { name: "prijava_id", referencedColumnName: "prijavaId" },
+    inverseJoinColumn: { name: "zaposleni_id", referencedColumnName: "zaposleniId"}
+  })
+  zaposleni: Zaposleni[];
 }
