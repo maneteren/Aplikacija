@@ -12,7 +12,7 @@ import { ApiResponse } from '../../misc/api.response.class';
 export class AdministratorService {
     constructor(
         @InjectRepository(Administrator)
-        private readonly administrator: Repository<Administrator>
+        private readonly administrator: Repository<Administrator>,
     ) { }
 
     getAll(): Promise<Administrator[]> {

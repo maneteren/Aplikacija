@@ -11,6 +11,8 @@ import { Prijava } from '../entities/prijava.entity';
 import { PrijavaZaposleni } from '../entities/prijavaZaposleni.entity';
 import { Zaposleni } from '../entities/zaposleni.entity';
 import { AdministratorController } from './controllers/api/administrator.controller';
+import { ZaposleniController } from './controllers/api/zaposleni.controller';
+import { ZaposleniService } from './services/zaposleni/zaposleni.service';
 
 @Module({
   imports: [
@@ -32,12 +34,19 @@ import { AdministratorController } from './controllers/api/administrator.control
         Zaposleni,
        ]
     }), 
-    TypeOrmModule.forFeature([ Administrator ])
+    TypeOrmModule.forFeature([ 
+      Administrator,
+      Zaposleni
+    ])
   ],
   controllers: [
     AppController,
-    AdministratorController
+    AdministratorController,
+    ZaposleniController
   ],
-  providers: [AdministratorService],
+  providers: [
+    AdministratorService,
+    ZaposleniService
+  ],
 })
 export class AppModule {}
