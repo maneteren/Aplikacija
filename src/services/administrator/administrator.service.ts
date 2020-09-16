@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { resolve } from 'path';
 import { Repository } from 'typeorm';
 import { Administrator } from '../../../entities/administrator.entity';
 import { AddAdministratorDto } from '../../dtos/administrator/add.administrator.dto';
