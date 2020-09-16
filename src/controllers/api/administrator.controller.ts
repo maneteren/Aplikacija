@@ -22,7 +22,8 @@ export class AdministratorController {
     // GET http://localhost:3000/api/administrator/4/ "dostavi mi administratora sa id 4"
     @Get(':id')
     getById(@Param('id') administratorId: number): Promise<Administrator | ApiResponse> {
-        return new Promise(async (resolve) =>{
+        return new Promise(async (resolve) => {
+            // eslint-disable-next-line prefer-const
             let admin = await this.administratorService.getById(administratorId);
 
             if (admin === undefined) {
@@ -33,7 +34,7 @@ export class AdministratorController {
         });
     }
 
-    // PUT http://localhost:3000/api/administrator
+    // PUT http://localhost:3000/api/administrator "Hocu da dodam administratora" - mozda mi ne treba u aplikaciji?
     @Put()
     add(@Body() data: AddAdministratorDto): Promise<Administrator | ApiResponse> {
         return this.administratorService.add(data);

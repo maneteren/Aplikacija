@@ -19,6 +19,7 @@ import { OdjavaController } from './controllers/api/odjava.controller';
 import { OdjavaService } from './services/odjava/odjava.service';
 import { IzvestajService } from './services/izvestaj/izvestaj.service';
 import { IzvestajController } from './controllers/api/izvestaj.controller';
+import { AuthController } from './controllers/api/auth.controller';
 
 @Module({
   imports: [
@@ -54,7 +55,8 @@ import { IzvestajController } from './controllers/api/izvestaj.controller';
     ZaposleniController,
     PrijavaController,
     OdjavaController,
-    IzvestajController
+    IzvestajController,
+    AuthController
   ],
   providers: [
     AdministratorService,

@@ -7,6 +7,7 @@ import { Administrator } from '../../../entities/administrator.entity';
 import { AddAdministratorDto } from '../../dtos/administrator/add.administrator.dto';
 import { EditAdministratorDto } from '../../dtos/administrator/edit.administrator.dto';
 import { ApiResponse } from '../../misc/api.response.class';
+import {resolve} from "dns";
 import * as crypto from 'crypto';
 
 @Injectable()
@@ -18,6 +19,19 @@ export class AdministratorService {
 
     getAll(): Promise<Administrator[]> {
         return this.administrator.find();
+    }
+
+    // Pronalazenje administratora po username
+    async getByUsername(username: string): Promise<Administrator | null> {
+        const admin = await this.administrator.findOne({
+            username: username
+        });
+
+        if(admin) {
+            return admin;
+        }
+
+        return null;
     }
 
     getById(id: number): Promise<Administrator> {
