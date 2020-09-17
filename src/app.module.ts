@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './controllers/app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfiguration } from '../config/database.configuration';
@@ -20,6 +20,7 @@ import { OdjavaService } from './services/odjava/odjava.service';
 import { IzvestajService } from './services/izvestaj/izvestaj.service';
 import { IzvestajController } from './controllers/api/izvestaj.controller';
 import { AuthController } from './controllers/api/auth.controller';
+import { AuthMiddleware } from './middlewares/auth.middleware';
 
 @Module({
   imports: [
@@ -65,5 +66,15 @@ import { AuthController } from './controllers/api/auth.controller';
     OdjavaService,
     IzvestajService
   ],
+  exports: [
+    AdministratorService
+  ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthMiddleware)
+      .exclude('auth/*')
+      .forRoutes('api/*');
+  }
+}
